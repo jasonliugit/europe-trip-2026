@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>欧洲行 · 2026.07.25 - 08.08 | 巴黎 · 瑞士 · 意大利</title>
+<style>
+:root{
+  --cream:#f8f5ee;
+  --card:#ffffff;
+  --ink:#232323;
+  --ink-soft:#5b5750;
+  --line:#e8e2d6;
+  --gold:#b8862c;
+  --gold-bg:#fbf1dd;
+  --paris:#2f5da8;
+  --paris-bg:#eaf0fb;
+  --swiss:#d52b1e;
+  --swiss-bg:#fdecea;
+  --italy:#1f7a4d;
+  --italy-bg:#e8f5ee;
+  --neutral-bg:#efe9da;
+  --shadow: 0 4px 18px rgba(30,25,15,0.07);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.6;
+}
+a{color:var(--paris);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,#1d2b45 0%,#2f4a72 40%,#3b6b8a 70%,#4a8a72 100%);
+  color:#fff;
+  padding:64px 20px 48px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";
+  position:absolute;inset:0;
+  background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08), transparent 40%),
+             radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08), transparent 40%);
+}
+.hero h1{font-size:2.4rem;margin:0 0 8px;letter-spacing:2px;font-weight:700;position:relative;}
+.hero .sub{font-size:1.05rem;opacity:0.92;margin-bottom:18px;position:relative;}
+.hero .route{font-size:1rem;opacity:0.85;position:relative;letter-spacing:1px;}
+
+/* NAV */
+nav.tabs{
+  position:sticky;top:0;z-index:50;
+  background:rgba(248,245,238,0.96);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  display:flex;overflow-x:auto;white-space:nowrap;padding:0 10px;
+}
+nav.tabs a{color:var(--ink-soft);padding:14px 16px;font-size:0.92rem;font-weight:600;border-bottom:3px solid transparent;}
+nav.tabs a:hover{color:var(--ink);text-decoration:none;border-bottom-color:var(--gold);}
+
+/* CONTAINER */
+.wrap{max-width:920px;margin:0 auto;padding:36px 18px 10px;}
+
+/* OVERVIEW STRIP */
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:10px;}
+.overview-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow);text-align:center;}
+.overview-card .flag{font-size:1.6rem;}
+.overview-card h4{margin:6px 0 2px;font-size:1.02rem;}
+.overview-card .dates{font-size:0.82rem;color:var(--ink-soft);}
+.overview-card .nights{display:inline-block;margin-top:6px;font-size:0.75rem;background:var(--gold-bg);color:var(--gold);padding:2px 10px;border-radius:10px;}
+
+/* SECTION HEADERS (non-collapsible: overview only) */
+.section-title{
+  font-size:1.5rem;margin:56px 0 6px;padding-bottom:8px;border-bottom:2px solid var(--line);
+  display:flex;align-items:baseline;gap:10px;scroll-margin-top:60px;
+}
+.section-title .tag{font-size:0.95rem;font-weight:500;color:var(--ink-soft);}
+.section-sub{color:var(--ink-soft);font-size:0.9rem;margin-bottom:22px;}
+
+/* LEVEL-1 ACCORDION shared (city + generic section) */
+details.city-acc,details.section-acc{
+  border-radius:16px;overflow:hidden;margin-bottom:14px;border:1px solid var(--line);
+  scroll-margin-top:60px;
+}
+details.city-acc>summary,details.section-acc>summary{
+  list-style:none;cursor:pointer;padding:18px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+}
+details.city-acc>summary::-webkit-details-marker,details.section-acc>summary::-webkit-details-marker{display:none;}
+details.city-acc>summary .titlegroup,details.section-acc>summary .titlegroup{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+details.city-acc>summary h2,details.section-acc>summary h2{margin:0;font-size:1.25rem;}
+details.city-acc>summary .meta,details.section-acc>summary .meta{font-size:0.85rem;color:var(--ink-soft);}
+details.city-acc>summary .chev,details.section-acc>summary .chev{transition:transform .2s;font-size:1.1rem;color:var(--ink-soft);}
+details.city-acc[open]>summary .chev,details.section-acc[open]>summary .chev{transform:rotate(90deg);}
+details.city-acc.paris>summary{background:var(--paris-bg);}
+details.city-acc.swiss>summary{background:var(--swiss-bg);}
+details.city-acc.italy>summary{background:var(--italy-bg);}
+details.section-acc>summary{background:var(--neutral-bg);}
+.city-acc-body,.section-acc-body{padding:18px 20px 20px;background:var(--card);}
+
+/* HOTEL BANNER inline (top of each city) */
+.hotel-inline{
+  background:#f4f7f3;border:1px solid #dbe6dd;border-left:4px solid var(--italy);
+  border-radius:10px;padding:12px 16px;margin:0 0 16px;font-size:0.88rem;
+}
+.hotel-inline b{display:block;font-size:0.98rem;margin-bottom:2px;}
+.hotel-inline a{font-size:0.82rem;}
+
+/* DAY ACCORDION (level 2) */
+details.day-acc{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:#fdfcf9;}
+details.day-acc>summary{list-style:none;cursor:pointer;padding:10px 14px;display:flex;align-items:center;gap:12px;}
+details.day-acc>summary::-webkit-details-marker{display:none;}
+details.day-acc>summary .chev{margin-left:auto;transition:transform .2s;color:var(--ink-soft);flex-shrink:0;}
+details.day-acc[open]>summary .chev{transform:rotate(90deg);}
+details.day-acc>summary .day-title{flex:1;font-weight:700;font-size:0.98rem;}
+
+/* Calendar-tile date badge */
+.date-tile{display:flex;flex-direction:column;align-items:center;width:52px;flex-shrink:0;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#fff;}
+.date-tile .m{display:block;width:100%;text-align:center;background:var(--gold);color:#fff;font-size:0.6rem;font-weight:700;letter-spacing:0.5px;padding:2px 0;text-transform:uppercase;}
+.date-tile .d{display:block;text-align:center;font-size:1.3rem;font-weight:800;color:var(--ink);padding:3px 0 0;font-family:Georgia,'Times New Roman',serif;line-height:1.1;}
+.date-tile .w{display:block;text-align:center;font-size:0.65rem;color:var(--ink-soft);padding:1px 0 4px;}
+
+.day-acc-body{padding:2px 16px 16px;}
+
+/* ACTIVITY */
+.activity{display:flex;gap:10px;padding:9px 0;border-top:1px dashed var(--line);}
+.activity:first-of-type{border-top:none;}
+.activity .icon{font-size:1.15rem;flex-shrink:0;width:26px;text-align:center;}
+.activity .body{flex:1;}
+.activity .name{font-weight:600;}
+.activity .name .en{font-weight:400;color:var(--ink-soft);font-size:0.85rem;}
+.activity .detail{font-size:0.85rem;color:var(--ink-soft);margin-top:2px;}
+.badge{display:inline-block;background:var(--gold-bg);color:var(--gold);font-size:0.78rem;font-weight:700;padding:2px 9px;border-radius:8px;margin-right:6px;}
+.badge.time{background:#fbeadd;color:#c1622a;}
+.badge.ref{background:#eef0f2;color:#5b5750;font-weight:500;}
+
+/* TRANSIT BOX */
+.transit{background:#fbfaf6;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:14px 16px;margin:10px 0;}
+.transit .transit-title{font-weight:700;font-size:0.92rem;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.transit .route-line{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:0.95rem;font-weight:600;}
+.transit .route-line .pt{flex:1;min-width:140px;}
+.transit .route-line .pt small{display:block;font-weight:400;color:var(--ink-soft);font-size:0.78rem;}
+.transit .route-line .arrow{color:var(--gold);font-size:1.2rem;}
+.transit .meta-row{margin-top:8px;font-size:0.82rem;color:var(--ink-soft);display:flex;gap:14px;flex-wrap:wrap;}
+.transit .meta-row b{color:var(--ink);}
+
+.note-box{margin-top:10px;font-size:0.82rem;color:#a05a2c;background:#fdf2e4;padding:8px 12px;border-radius:6px;}
+
+details.route-note{margin-top:10px;font-size:0.85rem;background:#f6f5f0;border-radius:8px;padding:8px 12px;}
+details.route-note summary{cursor:pointer;font-weight:600;color:var(--ink-soft);}
+details.route-note[open] summary{color:var(--ink);}
+details.route-note .content{margin-top:8px;color:var(--ink-soft);line-height:1.7;}
+
+/* HOTEL CARDS SECTION */
+.hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+.hotel-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);}
+.hotel-card h3{margin:0 0 4px;font-size:1.05rem;}
+.hotel-card .addr{font-size:0.88rem;color:var(--ink-soft);margin-bottom:10px;}
+.hotel-card .row{font-size:0.85rem;display:flex;justify-content:space-between;padding:4px 0;border-top:1px dashed var(--line);}
+.hotel-card .row:first-of-type{border-top:none;}
+.hotel-card .row span:first-child{color:var(--ink-soft);}
+.hotel-card .maplink{display:inline-block;margin-top:10px;font-size:0.82rem;}
+
+/* FOOD TABLE */
+table.food{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;}
+table.food th,table.food td{padding:10px 12px;font-size:0.88rem;border-bottom:1px solid var(--line);text-align:left;}
+table.food th{background:#f1ede2;font-weight:700;}
+table.food tr:last-child td{border-bottom:none;}
+
+/* TIPS */
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+.tip-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);}
+.tip-card h4{margin:0 0 6px;font-size:0.98rem;display:flex;gap:6px;align-items:center;}
+.tip-card p{margin:0;font-size:0.86rem;color:var(--ink-soft);}
+
+footer{text-align:center;padding:40px 20px 60px;color:var(--ink-soft);font-size:0.82rem;}
+
+@media (max-width:600px){
+  .hero h1{font-size:1.7rem;}
+  .wrap{padding:24px 12px;}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>欧 洲 之 旅</h1>
+  <div class="sub">2026年7月25日 — 8月8日 · 14天13晚</div>
+  <div class="route">🇫🇷 巴黎 → 🇨🇭 卢塞恩 → 施皮茨 → 🇮🇹 佛罗伦萨 → 罗马</div>
+</header>
+
+<nav class="tabs">
+  <a href="#overview">总览</a>
+  <a href="#paris">巴黎</a>
+  <a href="#luzern">卢塞恩</a>
+  <a href="#spiez">施皮茨</a>
+  <a href="#florence">佛罗伦萨</a>
+  <a href="#rome">罗马</a>
+  <a href="#transport">交通详情</a>
+  <a href="#hotels">住宿信息</a>
+  <a href="#food" style="display:none">美食清单</a>
+  <a href="#tips">实用贴士</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- OVERVIEW -->
+  <h2 class="section-title" id="overview">行程总览 <span class="tag">Overview</span></h2>
+  <div class="overview-grid">
+    <div class="overview-card"><div class="flag">🗼</div><h4>巴黎 Paris</h4><div class="dates">7/25 - 7/29</div><span class="nights">4 晚</span></div>
+    <div class="overview-card"><div class="flag">🏔️</div><h4>卢塞恩 Luzern</h4><div class="dates">7/29 - 7/31</div><span class="nights">2 晚</span></div>
+    <div class="overview-card"><div class="flag">⛰️</div><h4>施皮茨 Spiez</h4><div class="dates">7/31 - 8/3</div><span class="nights">3 晚</span></div>
+    <div class="overview-card"><div class="flag">🏛️</div><h4>佛罗伦萨 Florence</h4><div class="dates">8/3 - 8/5</div><span class="nights">2 晚</span></div>
+    <div class="overview-card"><div class="flag">🏺</div><h4>罗马 Rome</h4><div class="dates">8/5 - 8/8</div><span class="nights">3 晚</span></div>
+  </div>
+  <p class="section-sub">飞机往返：LAX ⇄ 巴黎(CDG) / 罗马(FCO) ⇄ LAX。全部日期均为 2026 年。点击下方各城市展开行程，再点击具体某天展开当日细节。换乘/前往下一目的地的当天，归入出发城市一栏。航班详情统一见"交通详情"。</p>
+
+  <!-- ================= PARIS ================= -->
+  <details class="city-acc paris" id="paris">
+    <summary>
+      <div class="titlegroup"><h2>🇫🇷 巴黎 Paris</h2><span class="meta">7/25 - 7/29 · 4晚</span></div>
+      <span class="chev">›</span>
+    </summary>
+    <div class="city-acc-body">
+      <div class="hotel-inline">
+        🏨 <b>Hôtel Moderniste</b>
+        地址：5 Rue de Langeac, 15th arr., 75015 Paris, France ·
+        确认号 5004.216.371 (PIN 5421) · 电话 +33 1 45 32 50 60
+        <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=5+Rue+de+Langeac+75015+Paris+France">📍 地图</a>
+      </div>
+
+      <details class="day-acc">
+        <summary><div class="date-tile"><span class="m">JUL</span><span class="d">25</span><span class="w">周六</span></div><div class="day-title">抵达巴黎 · 埃菲尔铁塔 · 塞纳河游船</div><span class="chev">›</span></summary>
+        <div class="day-acc-body">
+          <div class="activity"><div class="icon">✈️</div><div class="body"><div class="name">抵达戴高乐机场 <span class="en">CDG</span></div><div class="detail">09:05 到达 · 航班详情见下方"交通详情"</div></div></div>
+          <div class="activity"><div class="icon">🚕</div><div class="body"><div class="name">机场 → 酒店</div><div class="detail">出租车前往 Hôtel Moderniste，先寄存行李（正式入住 15:00-23:30）</div></div></div>
+          <div class="activity">
+            <div class="icon">🗼</div>
+            <div class="body">
+              <div class="name">埃菲尔铁塔 <span class="en">Eiffel Tower</span></div>
+              <div class="detail"><span class="badge time">预约 22:00</span><span class="badge">顶层电梯票</span><span class="badge ref">订单 262010316331</span></div>
+              <div class="detail">入口：花园内标注"持票游客"的入口 · 建议提前15-20分钟到达安检</div>
+            </div>
+          </div>
+          <div class="activity">
+            <div class="icon">🚤</div>
+            <div class="body">
+              <div class="name">塞纳河游船 <span class="en">Seine River Cruise</span></div>
+              <div class="detail"><span class="badge time">7/25 全天，无固定时段</span><span class="badge ref">订单 1422217413</span></div>
+              <div class="detail">Bateaux Parisiens · 登船点：埃菲尔铁塔旁 Port de la Bourdonnais 3号码头，现场扫码登船（每30分钟一班，10:00-22:30）</div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="day-acc">
+        <summary><div class="date-tile"><span class="m">JUL</span><span class="d">26</span><span class="w">周日</span></div><div class="day-title">凡尔赛宫</div><span class="chev">›</span></summary>
+        <div class="day-acc-body">
+          <div class="activity">
+            <div class="icon">🏰</div>
+            <div class="body">
+              <div class="name">凡尔赛宫 <span class="en">Palace of Versailles</span></div>
+              <div class="detail"><span class="badge time">预约 10:00</span><span class="badge">通票 Billet Passeport</span><span class="badge ref">交易号 197034443</span></div>
+              <div class="detail">入口：Pavillon Dufour 大门 A · 含2份语音导览（3人共用注意）· 允许在预约时段后半小时内入场</div>
+            </div>
+            <details class="route-note"><summary>参观路线参考</summary><div class="content">主宫殿（皇家礼拜堂 / 镜厅 / 国王王后套房）→ 大运河站（午餐）→ 大特里亚农宫 → 小特里亚农宫 → 王后农庄</div></details>
+          </div>
+        </div>
+      </details>
+
+      <details class="day-acc">
+        <summary><div class="date-tile"><span class="m">JUL</span><span class="d">27</span><span class="w">周一</span></div><div class="day-title">卢浮宫 · 凯旋门 · 香榭丽舍</div><span class="chev">›</span></summary>
+        <div class="day-acc-body">
+          <div class="activity">
+            <div class="icon">🖼️</div>
+            <div class="body">
+              <div class="name">卢浮宫 <span class="en">Louvre Museum</span></div>
+              <div class="detail"><span class="badge time">预约 9:30</span><span class="badge ref">订单 C261370016686</span></div>
+              <div class="detail">入口：卡鲁塞勒 / 玻璃金字塔入口（或17:15前可用狮子门）· 含2份语音导览</div>
+            </div>
+            <details class="route-note"><summary>参观路线参考（蓄力馆→德农馆→蒙娜丽莎）</summary><div class="content">
+              玻璃金字塔入口 → 蓄力馆(Sully)入口 → 中世纪护城河遗址 → 狮身人面像 →（右侧楼梯）→ 断臂维纳斯 → 丘比特之吻 → 米开朗基罗奴隶雕像 → 胜利女神 → 大画廊(意大利绘画) → 红厅(法国巨幅绘画) → 蒙娜丽莎
+            </div></details>
+          </div>
+          <div class="activity"><div class="icon">🚶</div><div class="body"><div class="name">凯旋门 <span class="en">Arc de Triomphe</span></div></div></div>
+          <div class="activity"><div class="icon">🛍️</div><div class="body"><div class="name">香榭丽舍大街 <span class="en">Avenue des Champs-Élysées</span></div></div></div>
+          <div class="activity"><div class="icon">⛲</div><div class="body"><div class="name">协和广场 <span class="en">Place de la Concorde</span></div></div></div>
+        </div>
+      </details>
+
+      <details class="day-acc">
+        <summary><div class="date-tile"><span class="m">JUL</span><span class="d">28</span><span class="w">周二</span></div><div class="day-title">奥赛博物馆 · 蒙马特</div><span class="chev">›</span></summary>
+        <div class="day-acc-body">
+          <div class="activity">
+            <div class="icon">🎨</div>
+            <div class="body">
+              <div class="name">奥赛博物馆 <span class="en">Musée d'Orsay</span></div>
+              <div class="detail"><span class="badge time">预约 10:00</span><span class="badge ref">交易号 197797547</span></div>
+              <div class="detail">入口1（Quai侧）· 迟到超30分钟将失去Quai入口资格，但可改从正门(Parvis)入场</div>
+            </div>
+            <details class="route-note"><summary>审美变革参观路线</summary><div class="content">
+              学院派（安格尔《泉》）→ 现实主义（库尔贝《奥尔南的葬礼》/ 米勒《拾穗者》）→ 马奈（《奥林匹亚》《草地上的午餐》）→ 印象派（莫奈 / 雷诺阿 / 德加）→ 后印象派（塞尚 / 梵高）
+            </div></details>
+          </div>
+          <div class="activity">
+            <div class="icon">🎡</div>
+            <div class="body"><div class="name">蒙马特 <span class="en">Montmartre</span></div></div>
+            <details class="route-note"><summary>徒步路线</summary><div class="content">
+              Blanche地铁站 → 红磨坊 → 爱墙 → La Maison Rose → 小丘广场 → 圣心堂 → 圣心堂台阶观景 → Carousel → 沉没的房子 → Anvers地铁站
+            </div></details>
+          </div>
+        </div>
+      </details>
+
+      <details class="day-acc">
+        <summary><div class="date-tile"><span class="m">JUL</span><span class="d">29</span><span class="w">周三</span></div><div class="day-title">→ 卢塞恩（瑞士）</div><span class="chev">›</span></summary>
+        <div class="day-acc-body">
+          <div class="activity"><div class="icon">🏨</div><div class="body"><div class="name">退房 Hôtel Moderniste</div><div class="detail">退房时间 05:00-11:00</div></div></div>
+          <div class="activity"><div class="icon">🚕</div><div class="body"><div class="name">酒店 → 火车站</div><div class="detail">出租车</div></div></div>
+
+          <div class="transit">
+            <div class="transit-title">🚄 火车 1/2：Paris → Basel</div>
+            <div class="route-line">
+              <div class="pt">Paris Gare de Lyon<small>10:22 出发</small></div>
+              <div class="arrow">→</div>
+              <div class="pt">Bâle SBB (Basel)<small>13:23 到达</small></div>
+            </div>
+            <div class="meta-row"><span><b>车次：</b>TGV Lyria 9211</span><span><b>舱位：</b>2等座</span><span><b>车厢/座位：</b>15车厢 · 548/552/553</span><span><b>订位号：</b>6WRHTF</span></div>
+          </div>
+
+          <div class="transit">
+            <div class="transit-title">🚄 火车 2/2：Basel → Luzern</div>
+            <div class="route-line">
+              <div class="pt">Basel SBB<small>14:04 出发</small></div>
+              <div class="arrow">→</div>
+              <div class="pt">Luzern<small>15:05 到达</small></div>
+            </div>
+            <div class="meta-row"><span><b>车次：</b>SBB IR2327</span><span><b>舱位：</b>2等座（区间票，无座位号）</span></div>
+          </div>
+
+          <div class="activity"><div class="icon">🚌</div><div class="body"><div class="name">火车站 → Hotel Seeburg</div><div class="detail">24路公交，往 Meggen Tschädigen 方向，Hotel Seeburg 站下车（住宿已含市内公交票）· 入住 15:00-23:30</div></div></div>
+        </div>
+      </details>
+    </div>
+  </details>
+
+  <!-- ================= LUZERN ================= -->
+  <details class="city-acc swiss" id="luzern">
+    <summary>
+      <div class="titlegroup"><h2>🇨🇭 卢塞恩 Luzern</h2><span class="meta">7/29 - 7/31 · 2晚</span></div>
+      <span class="chev">›</span>
+    </summary>
+    <div class="city-acc-body">
+      <div class="hotel-inline">
+        🏨 <b>Hotel Seeburg</b>
+        地址：Seeburgstrasse 59-61, 6006 Lucerne, Switzerland ·
+        确认号 6481.127.820 (PIN 5915) · 电话 +41 41 375 55 55
+        <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=Seeburgstrasse+59-61+6006+Lucerne+Switzerland">📍 地图</a>
+      </div>
+
+      <details class="day-acc">
+        <summary><div class="date-tile"><span class="m">JUL</span><span class="d">30</span><span class="w">周四</span></div><div class="day-title">水塔花桥 · 冰川公园</div><span class="chev">›</span></summary>
+        <div class="day-acc-body">
+          <div class="activity"><div class="icon">🌉</div><div class="body"><div class="name">水塔花桥 <span class="en">Chapel Bridge</span></div></div></div>
+          <div class="activity"><div class="icon">🏞️</div><div class="body"><div class="name">冰川公园 <span class="en">Glacier Garden</span></div></div></div>
+          <details class="route-note"><summary>徒步路线参考</summary><div class="content">
+            酒店坐24路公交到火车站，然后 city walk 走回酒店：水塔花桥 → 老城区 → 垂死狮子像 → 冰川公园 → Nationalquai 湖边步道 → Grand Casino → Lido → Hotel Seeburg
+          </div></details>
+        </div>
+      </details>
+
+      <details class="day-acc">
+        <summary><div class="date-tile"><span class="m">JUL</span><span class="d">31</span><span class="w">周五</span></div><div class="day-title">→ 施皮茨</div><span class="chev">›</span></summary>
+        <div class="day-acc-body">
+          <div class="activity"><div class="icon">🏨</div><div class="body"><div class="name">退房 Hotel Seeburg</div><div class="detail">退房时间 06:30-11:00</div></div></div>
+
+          <div class="transit">
+            <div class="transit-title">🚄 观光列车 1/2：Luzern → Interlaken Ost</div>
+            <div class="route-line"><div class="pt">Luzern<small>区间通票，经 Brünig 线</small></div><div class="arrow">→</div><div class="pt">Interlaken Ost</div></div>
+            <div class="meta-row"><span><b>舱位：</b>1等座（点对点区间票，不限定具体车次/座位）</span></div>
+          </div>
+
+          <div class="transit">
+            <div class="transit-title">🚄 观光列车 2/2：Interlaken Ost → Spiez</div>
+            <div class="route-line"><div class="pt">Interlaken Ost<small>11:29 出发</small></div><div class="arrow">→</div><div class="pt">Spiez<small>12:59 到达</small></div></div>
+            <div class="meta-row"><span><b>票种：</b>Libero 区域票（2等座，无固定座位）</span></div>
+          </div>
+
+          <div class="activity"><div class="icon">🚶</div><div class="body"><div class="name">车站 → Casa del Sole Apartments</div><div class="detail">步行前往 · 入住 15:00-24:00</div></div></div>
+          <div class="activity"><div class="icon">🌅</div><div class="body"><div class="name">湖边漫步</div></div></div>
+        </div>
+      </details>
+    </div>
+  </details>
+
+  <!-- ================= SPIEZ ================= -->
+  <details class="city-acc swiss" id="spiez">
+    <summary>
+      <div class="titlegroup"><h2>🇨🇭 施皮茨 Spiez</h2><span class="meta">7/31 - 8/3 · 3晚</span></div>
+      <span class="chev">›</span>
+    </summary>
+    <div class="city-acc-body">
+      <div class="hotel-inline">
+        🏨 <b>Casa del Sole Apartments</b>（Ruhig - Nähe Interlaken）
+        地址：Lörtscherweg 3, 3700 Spiez, Switzerland ·
+        确认号 6211.815.873 (PIN 3738) · 电话 +41 79 866 68 62
+        <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=L%C3%B6rtscherweg+3+3700+Spiez+Switzerland">📍 地图</a>
+      </div>
+
+      <details class="day-acc">
+        <summary><div class="date-tile"><span class="m">AUG</span><span class="d">1</span><span class="w">周六</span></div><div class="day-title">少女峰</div><span class="chev">›</span></summary>
+        <div class="day-acc-body">
+          <div class="activity"><div class="icon">⛰️</div><div class="body"><div class="name">少女峰 <span class="en">Jungfraujoch</span></div><div class="detail">未找到对应的车票/预约确认件 — 出发前请自行确认登山列车车次与预约时段</div></div></div>
+        </div>
+      </details>
+
+      <details class="day-acc">
+        <summary><div class="date-tile"><span class="m">AUG</span><span class="d">2</span><span class="w">周日</span></div><div class="day-title">图恩湖</div><span class="chev">›</span></summary>
+        <div class="day-acc-body">
+          <div class="activity"><div class="icon">⛴️</div><div class="body"><div class="name">Lake Thun 游船 · 周边小镇</div><div class="detail">未找到对应的船票确认件 — 可现场购票或提前在 bls.ch 上确认班次</div></div></div>
+        </div>
+      </details>
+
+      <details class="day-acc">
+        <summary><div class="date-tile"><span class="m">AUG</span><span class="d">3</span><span class="w">周一</span></div><div class="day-title">→ 佛罗伦萨（意大利），途经米兰</div><span class="chev">›</span></summary>
+        <div class="day-acc-body">
+          <div class="activity"><div class="icon">🏨</div><div class="body"><div class="name">退房 Casa del Sole Apartments</div><div class="detail">退房时间：10:00前</div></div></div>
+
+          <div class="transit">
+            <div class="transit-title">🚄 火车 1/2：Spiez → Milano Centrale</div>
+            <div class="route-line">
+              <div class="pt">Spiez（3号站台）<small>08:05 出发</small></div>
+              <div class="arrow">→</div>
+              <div class="pt">Milano Centrale<small>10:50 到达</small></div>
+            </div>
+            <div class="meta-row"><span><b>车次：</b>EuroCity EC61</span><span><b>舱位：</b>2等座</span><span><b>车厢/座位：</b>7车厢 · 31/32/33</span><span><b>订位号：</b>ZQ636N</span></div>
+          </div>
+
+          <div class="activity">
+            <div class="icon">⛪</div>
+            <div class="body">
+              <div class="name">米兰大教堂 <span class="en">Duomo di Milano</span></div>
+              <div class="detail"><span class="badge time">预约 12:00（露台入场时间）</span><span class="badge">Fast-Track Pass · 3号绿色通道</span><span class="badge ref">预订号 OFD3904853</span></div>
+              <div class="detail">大教堂/博物馆区域可在此时段前后参观，露台需按预约时段进入 · 末次入场 18:00</div>
+            </div>
+          </div>
+          <div class="activity"><div class="icon">🚇</div><div class="body"><div class="name">转乘地铁至 Milano Rogoredo 站</div></div></div>
+
+          <div class="transit">
+            <div class="transit-title">🚄 火车 2/2：Milano Rogoredo → Firenze</div>
+            <div class="route-line">
+              <div class="pt">Milano Rogoredo<small>15:05 出发</small></div>
+              <div class="arrow">→</div>
+              <div class="pt">Firenze S.M. Novella<small>16:50 到达</small></div>
+            </div>
+            <div class="meta-row"><span><b>车次：</b>Frecciarossa 9321</span><span><b>舱位：</b>2等标准座</span><span><b>车厢/座位：</b>7车厢 · 11C/11D/12D</span><span><b>订位号：</b>S5Z9PN</span></div>
+            <div class="note-box">ℹ️ 原联程 Interlaken Ost→Zürich HB (IC811) 与 Zürich HB→Milano Rogoredo (EC153) 两段已不使用，实际为上方 Spiez→Milano Centrale 直达。</div>
+          </div>
+
+          <div class="activity"><div class="icon">🚶</div><div class="body"><div class="name">→ B&amp;B Dell'Olio</div><div class="detail">全程步行（含火车站）· 入住 12:30-18:30</div></div></div>
+        </div>
+      </details>
+    </div>
+  </details>
+
+  <!-- ================= FLORENCE ================= -->
+  <details class="city-acc italy" id="florence">
+    <summary>
+      <div class="titlegroup"><h2>🇮🇹 佛罗伦萨 Florence</h2><span class="meta">8/3 - 8/5 · 2晚</span></div>
+      <span class="chev">›</span>
+    </summary>
+    <div class="city-acc-body">
+      <div class="hotel-inline">
+        🏨 <b>B&amp;B Dell'Olio</b>
+        地址：Piazza Dell'Olio 3, Santa Maria Novella, 50123 Florence, Italy ·
+        确认号 6427.366.345 (PIN 4448) · 电话 +39 331 953 8824
+        <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=Piazza+Dell%27Olio+3+50123+Florence+Italy">📍 地图</a>
+      </div>
+
+      <details class="day-acc">
+        <summary><div class="date-tile"><span class="m">AUG</span><span class="d">4</span><span class="w">周二</span></div><div class="day-title">佛罗伦萨City Walk</div><span class="chev">›</span></summary>
+        <div class="day-acc-body">
+          <div class="activity">
+            <div class="icon">🚶</div>
+            <div class="body"><div class="name">徒步游览全城</div></div>
+            <details class="route-note" open><summary>路线参考</summary><div class="content">
+              圣母大教堂 → 洗礼堂 → Via dei Calzaiuoli（主要商业街） → 共和国广场 → 领主广场 → Loggia dei Lanzi（免费文艺复兴雕塑） → 乌菲兹美术馆 → 老桥 Ponte Vecchio → Oltrarno → Santo Spirito → 米开朗基罗广场（傍晚看日落） → Ponte alle Grazie 桥回城 → 圣十字圣殿（吃饭） → 回酒店
+            </div></details>
+          </div>
+        </div>
+      </details>
+
+      <details class="day-acc">
+        <summary><div class="date-tile"><span class="m">AUG</span><span class="d">5</span><span class="w">周三</span></div><div class="day-title">→ 罗马，斗兽场</div><span class="chev">›</span></summary>
+        <div class="day-acc-body">
+          <div class="activity"><div class="icon">🏨</div><div class="body"><div class="name">退房 B&amp;B Dell'Olio</div><div class="detail">退房时间：10:30前</div></div></div>
+
+          <div class="transit">
+            <div class="transit-title">🚄 火车：Firenze → Roma</div>
+            <div class="route-line">
+              <div class="pt">Firenze S.M. Novella<small>08:48 出发</small></div>
+              <div class="arrow">→</div>
+              <div class="pt">Roma Termini<small>10:25 到达</small></div>
+            </div>
+            <div class="meta-row"><span><b>车次：</b>Frecciarossa 9403（FrecciaDAYS Premium）</span><span><b>舱位：</b>2等 Premium</span><span><b>车厢/座位：</b>6车厢 · 7C/7D/8D</span><span><b>订位号：</b>S52P6N</span></div>
+          </div>
+
+          <div class="activity"><div class="icon">🚕</div><div class="body"><div class="name">火车站 → 酒店</div><div class="detail">出租车 · 入住 Residenza Maritti 14:00-20:00</div></div></div>
+
+          <div class="activity">
+            <div class="icon">🏟️</div>
+            <div class="body">
+              <div class="name">斗兽场 <span class="en">Colosseum</span></div>
+              <div class="detail"><span class="badge time">预约 15:00</span><span class="badge">24H Only Arena</span><span class="badge ref">预订号 OCO4330827</span></div>
+              <div class="detail">含古罗马广场 + 帕拉蒂尼山（可在斗兽场预约时段前后24小时内任选一次入场）· 建议提前15分钟到达，斗兽场每次参观限20分钟</div>
+            </div>
+          </div>
+          <div class="activity">
+            <div class="icon">🏛️</div>
+            <div class="body"><div class="name">古罗马广场 <span class="en">Roman Forum</span></div></div>
+            <details class="route-note"><summary>路线参考</summary><div class="content">古罗马广场 → 图拉真广场 Piazza Venezia → 威尼斯广场 / 图拉真柱 Trajan's Column</div></details>
+          </div>
+        </div>
+      </details>
+    </div>
+  </details>
+
+  <!-- ================= ROME ================= -->
+  <details class="city-acc italy" id="rome">
+    <summary>
+      <div class="titlegroup"><h2>🇮🇹 罗马 Rome</h2><span class="meta">8/5 - 8/8 · 3晚</span></div>
+      <span class="chev">›</span>
+    </summary>
+    <div class="city-acc-body">
+      <div class="hotel-inline">
+        🏨 <b>Residenza Maritti Decò Style - Guesthouse</b>
+        地址：Via Tor de' Conti 17, Rione Monti, 00184 Rome, Italy ·
+        确认号 5583.943.006 (PIN 1717) · 电话 +39 06 678 8233 · 含早餐（Massenzio餐厅）
+        <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=Via+Tor+de%27+Conti+17+00184+Rome+Italy">📍 地图</a>
+      </div>
+
+      <details class="day-acc">
+        <summary><div class="date-tile"><span class="m">AUG</span><span class="d">6</span><span class="w">周四</span></div><div class="day-title">梵蒂冈</div><span class="chev">›</span></summary>
+        <div class="day-acc-body">
+          <div class="activity">
+            <div class="icon">⛪</div>
+            <div class="body">
+              <div class="name">圣彼得大教堂 <span class="en">St. Peter's Basilica</span></div>
+              <div class="detail"><span class="badge time">大教堂 08:00</span><span class="badge time">穹顶电梯 09:00</span><span class="badge ref">预订码 TIE-716135</span></div>
+              <div class="detail">路线：蓝色 - Sobieski（索比斯基）线 · 从 Via di Porta Angelica 通道进入 · 大教堂前30分钟、穹顶电梯前15分钟需到达对应安检点 · 着装要求：长裤/过膝裙、遮肩</div>
+            </div>
+          </div>
+          <div class="activity">
+            <div class="icon">🖼️</div>
+            <div class="body">
+              <div class="name">梵蒂冈博物馆 <span class="en">Vatican Museums</span></div>
+              <div class="detail"><span class="badge time">预约 12:00</span><span class="badge ref">代码 2L2NFK150000000ON</span></div>
+              <div class="detail">入口：1号通道（Corridoio 1），从 Viale Vaticano 进入 · 需随身携带有效证件与门票，现场工作人员验证后方可入闸机</div>
+              <div class="detail">看点：地图长廊 → 拉斐尔房间（雅典学院） → 西斯廷礼拜堂（创造亚当 / 最后的审判） → 雕塑馆·八角庭院（拉奥孔） → 旋转楼梯</div>
+            </div>
+          </div>
+          <div class="activity"><div class="icon">🚕</div><div class="body"><div class="name">酒店 ↔ 梵蒂冈</div><div class="detail">出租车往返</div></div></div>
+        </div>
+      </details>
+
+      <details class="day-acc">
+        <summary><div class="date-tile"><span class="m">AUG</span><span class="d">7</span><span class="w">周五</span></div><div class="day-title">罗马City Walk</div><span class="chev">›</span></summary>
+        <div class="day-acc-body">
+          <div class="activity"><div class="icon">⛲</div><div class="body"><div class="name">纳沃纳广场 <span class="en">Piazza Navona</span></div></div></div>
+          <div class="activity"><div class="icon">🏛️</div><div class="body"><div class="name">万神殿 <span class="en">Pantheon</span></div></div></div>
+          <div class="activity"><div class="icon">💰</div><div class="body"><div class="name">许愿池 <span class="en">Trevi Fountain</span></div></div></div>
+          <div class="activity"><div class="icon">🌇</div><div class="body"><div class="name">西班牙广场 <span class="en">Spanish Steps</span></div></div></div>
+          <div class="activity"><div class="icon">🚶</div><div class="body"><div class="name">其余全部步行</div></div></div>
+        </div>
+      </details>
+
+      <details class="day-acc">
+        <summary><div class="date-tile"><span class="m">AUG</span><span class="d">8</span><span class="w">周六</span></div><div class="day-title">→ 洛杉矶</div><span class="chev">›</span></summary>
+        <div class="day-acc-body">
+          <div class="activity"><div class="icon">🏨</div><div class="body"><div class="name">退房 Residenza Maritti</div><div class="detail">退房时间 08:00-10:00</div></div></div>
+          <div class="activity"><div class="icon">🚕</div><div class="body"><div class="name">酒店 → 机场</div><div class="detail">出租车</div></div></div>
+          <div class="activity"><div class="icon">✈️</div><div class="body"><div class="name">飞机返程 <span class="en">Rome → Los Angeles</span></div><div class="detail">09:30 起飞 · 航班详情见下方"交通详情"</div></div></div>
+        </div>
+      </details>
+    </div>
+  </details>
+
+  <!-- ================= TRANSPORT SUMMARY ================= -->
+  <details class="section-acc" id="transport">
+    <summary>
+      <div class="titlegroup"><h2>交通详情汇总</h2><span class="meta">Flights &amp; Trains</span></div>
+      <span class="chev">›</span>
+    </summary>
+    <div class="section-acc-body">
+      <p class="section-sub">全程所有航班与火车票的关键信息，方便出行前统一核对。</p>
+      <table class="food">
+        <tr><th>日期</th><th>类型</th><th>车次/航班号</th><th>出发</th><th>到达</th><th>车厢/座位</th><th>订位号</th></tr>
+        <tr><td>7/24-25</td><td>✈️飞机</td><td>Air Tahiti Nui TN8</td><td>LAX 13:30(7/24)</td><td>CDG T2B 09:05(7/25)</td><td>19C</td><td>ESB7MX</td></tr>
+        <tr><td>7/29</td><td>🚄火车</td><td>TGV Lyria 9211</td><td>Paris Gare de Lyon 10:22</td><td>Bâle SBB 13:23</td><td>15车厢·548/552/553</td><td>6WRHTF</td></tr>
+        <tr><td>7/29</td><td>🚄火车</td><td>SBB IR2327</td><td>Basel SBB 14:04</td><td>Luzern 15:05</td><td>无座位号（区间票）</td><td>—</td></tr>
+        <tr><td>7/31</td><td>🚄火车</td><td>点对点区间票</td><td>Luzern</td><td>Interlaken Ost</td><td>1等座，无固定座位</td><td>—</td></tr>
+        <tr><td>7/31</td><td>🚄火车</td><td>Libero区域票</td><td>Interlaken Ost 11:29</td><td>Spiez 12:59</td><td>2等座，无固定座位</td><td>—</td></tr>
+        <tr><td>8/3</td><td>🚄火车</td><td>EuroCity EC61</td><td>Spiez 08:05（3号站台）</td><td>Milano Centrale 10:50</td><td>7车厢·31/32/33</td><td>ZQ636N</td></tr>
+        <tr><td>8/3</td><td>🚄火车</td><td>Frecciarossa 9321</td><td>Milano Rogoredo 15:05</td><td>Firenze S.M.N. 16:50</td><td>7车厢·11C/11D/12D</td><td>S5Z9PN</td></tr>
+        <tr><td>8/5</td><td>🚄火车</td><td>Frecciarossa 9403</td><td>Firenze S.M.N. 08:48</td><td>Roma Termini 10:25</td><td>6车厢·7C/7D/8D</td><td>S52P6N</td></tr>
+        <tr><td>8/8</td><td>✈️飞机</td><td>ITA Airways AZ620</td><td>Roma FCO T1 09:30</td><td>LAX T·B 13:15</td><td>42A/42B/42C</td><td>YDFVOX</td></tr>
+      </table>
+      <div class="note-box">⚠️ 出发航班 TN8（LAX→CDG）订单中只查到 19C 一个座位（Jian Liu 名下），请自行确认另外两人是否同航班或另有机票。</div>
+      <p class="section-sub" style="margin-top:14px;">🎫 <b>瑞士半价车票（Swiss Half Fare Card）</b>：<a href="https://www.swissrailways.com/en" target="_blank">swissrailways.com</a></p>
+    </div>
+  </details>
+
+  <!-- ================= HOTELS ================= -->
+  <details class="section-acc" id="hotels">
+    <summary>
+      <div class="titlegroup"><h2>住宿信息</h2><span class="meta">Hotels</span></div>
+      <span class="chev">›</span>
+    </summary>
+    <div class="section-acc-body">
+      <div class="hotel-grid">
+        <div class="hotel-card">
+          <h3>Hôtel Moderniste</h3>
+          <div class="addr">5 Rue de Langeac, 15th arr., 75015 Paris, France</div>
+          <div class="row"><span>入住</span><span>7/25 15:00-23:30</span></div>
+          <div class="row"><span>退房</span><span>7/29 05:00-11:00</span></div>
+          <div class="row"><span>确认号</span><span>5004.216.371 (PIN 5421)</span></div>
+          <div class="row"><span>电话</span><span>+33 1 45 32 50 60</span></div>
+          <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=5+Rue+de+Langeac+75015+Paris+France">📍 在地图中查看</a>
+        </div>
+        <div class="hotel-card">
+          <h3>Hotel Seeburg</h3>
+          <div class="addr">Seeburgstrasse 59-61, 6006 Lucerne, Switzerland</div>
+          <div class="row"><span>入住</span><span>7/29 15:00-23:30</span></div>
+          <div class="row"><span>退房</span><span>7/31 06:30-11:00</span></div>
+          <div class="row"><span>确认号</span><span>6481.127.820 (PIN 5915)</span></div>
+          <div class="row"><span>电话</span><span>+41 41 375 55 55</span></div>
+          <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Seeburgstrasse+59-61+6006+Lucerne+Switzerland">📍 在地图中查看</a>
+        </div>
+        <div class="hotel-card">
+          <h3>Casa del Sole Apartments</h3>
+          <div class="addr">Lörtscherweg 3, 3700 Spiez, Switzerland</div>
+          <div class="row"><span>入住</span><span>7/31 15:00-24:00</span></div>
+          <div class="row"><span>退房</span><span>8/3 00:00-10:00</span></div>
+          <div class="row"><span>确认号</span><span>6211.815.873 (PIN 3738)</span></div>
+          <div class="row"><span>电话</span><span>+41 79 866 68 62</span></div>
+          <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=L%C3%B6rtscherweg+3+3700+Spiez+Switzerland">📍 在地图中查看</a>
+        </div>
+        <div class="hotel-card">
+          <h3>B&amp;B Dell'Olio</h3>
+          <div class="addr">Piazza Dell'Olio 3, Santa Maria Novella, 50123 Florence, Italy</div>
+          <div class="row"><span>入住</span><span>8/3 12:30-18:30</span></div>
+          <div class="row"><span>退房</span><span>8/5 至10:30</span></div>
+          <div class="row"><span>确认号</span><span>6427.366.345 (PIN 4448)</span></div>
+          <div class="row"><span>电话</span><span>+39 331 953 8824</span></div>
+          <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Piazza+Dell%27Olio+3+50123+Florence+Italy">📍 在地图中查看</a>
+        </div>
+        <div class="hotel-card">
+          <h3>Residenza Maritti Decò Style</h3>
+          <div class="addr">Via Tor de' Conti 17, Rione Monti, 00184 Rome, Italy</div>
+          <div class="row"><span>入住</span><span>8/5 14:00-20:00</span></div>
+          <div class="row"><span>退房</span><span>8/8 08:00-10:00</span></div>
+          <div class="row"><span>确认号</span><span>5583.943.006 (PIN 1717)</span></div>
+          <div class="row"><span>电话</span><span>+39 06 678 8233</span></div>
+          <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Via+Tor+de%27+Conti+17+00184+Rome+Italy">📍 在地图中查看</a>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <!-- ================= FOOD (hidden for now — remove style="display:none" on the details tag to unhide) ================= -->
+  <details class="section-acc" id="food" style="display:none">
+    <summary>
+      <div class="titlegroup"><h2>欧洲十大必吃清单</h2><span class="meta">Food List</span></div>
+      <span class="chev">›</span>
+    </summary>
+    <div class="section-acc-body">
+      <table class="food">
+        <tr><th>城市</th><th>中文</th><th>English</th><th>当地语言</th><th>推荐</th></tr>
+        <tr><td>🇫🇷 Paris</td><td>黄油可颂</td><td>Butter Croissant</td><td>Croissant au beurre</td><td>⭐⭐⭐⭐⭐</td></tr>
+        <tr><td>🇫🇷 Paris</td><td>法棍</td><td>Baguette</td><td>Baguette Tradition</td><td>⭐⭐⭐⭐⭐</td></tr>
+        <tr><td>🇫🇷 Paris</td><td>法式洋葱汤</td><td>French Onion Soup</td><td>Soupe à l'oignon gratinée</td><td>⭐⭐⭐⭐</td></tr>
+        <tr><td>🇨🇭 Lucerne</td><td>奶酪火锅</td><td>Cheese Fondue</td><td>Käsefondue</td><td>⭐⭐⭐⭐⭐</td></tr>
+        <tr><td>🇨🇭 Lucerne</td><td>瑞士土豆饼</td><td>Rösti</td><td>Rösti</td><td>⭐⭐⭐⭐</td></tr>
+        <tr><td>🇮🇹 Florence</td><td>佛罗伦萨牛排</td><td>Florentine Steak</td><td>Bistecca alla Fiorentina</td><td>⭐⭐⭐⭐⭐</td></tr>
+        <tr><td>🇮🇹 Rome</td><td>奶酪黑胡椒意面</td><td>Cacio e Pepe</td><td>Cacio e Pepe</td><td>⭐⭐⭐⭐⭐</td></tr>
+        <tr><td>🇮🇹 Rome</td><td>卡邦尼意面</td><td>Carbonara</td><td>Pasta alla Carbonara</td><td>⭐⭐⭐⭐⭐</td></tr>
+        <tr><td>🇮🇹 Rome</td><td>意式冰淇淋</td><td>Gelato</td><td>Gelato Artigianale</td><td>⭐⭐⭐⭐⭐</td></tr>
+        <tr><td>🇮🇹 Milan</td><td>浓缩咖啡</td><td>Espresso</td><td>Caffè Espresso</td><td>⭐⭐⭐⭐</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <!-- ================= TIPS ================= -->
+  <details class="section-acc" id="tips">
+    <summary>
+      <div class="titlegroup"><h2>实用贴士</h2><span class="meta">Practical Info</span></div>
+      <span class="chev">›</span>
+    </summary>
+    <div class="section-acc-body">
+      <div class="tips-grid">
+        <div class="tip-card"><h4>🎫 巴黎地铁票</h4><p>窗口购买 3 张 Navigo Easy 卡，每卡加购10张 Metro-Train-RER 车票（"Three Navigo Easy cards with ten Metro-Train-RER tickets on each, please."）</p></div>
+        <div class="tip-card"><h4>🚌 卢塞恩公交</h4><p>火车站⇄酒店坐24路公交（往 Meggen Tschädigen 方向），Hotel Seeburg 站下车；住宿已包含市内所有公交车票，回程可City walk走回酒店。</p></div>
+        <div class="tip-card"><h4>📱 米兰地铁</h4><p>可直接用 Apple Pay 刷卡进闸机，无需实体票。</p></div>
+        <div class="tip-card"><h4>🚶 佛罗伦萨</h4><p>全程步行即可（包括往返火车站），无需其他交通工具。</p></div>
+        <div class="tip-card"><h4>🚕 罗马交通</h4><p>火车站→酒店、酒店↔梵蒂冈、酒店→机场均建议打车；其余景点均可步行到达。</p></div>
+        <div class="tip-card"><h4>👗 梵蒂冈着装要求</h4><p>圣彼得大教堂/梵蒂冈博物馆要求遮肩、长裤或过膝裙，禁止背包/行李箱进入，无衣帽间寄存服务（仅婴儿车可存放）。</p></div>
+        <div class="tip-card"><h4>⏰ 提前到达提醒</h4><p>圣彼得大教堂请提前30分钟到圣彼得广场安检；斗兽场、埃菲尔铁塔等均建议提前15-20分钟到达入口。</p></div>
+      </div>
+    </div>
+  </details>
+
+</div>
+
+<footer>制作于 2026 · 数据来源：各订单确认件原文 · 如发现信息有误，请以官方订单邮件为准</footer>
+
+<script>
+document.querySelectorAll('nav.tabs a').forEach(function(link){
+  link.addEventListener('click', function(){
+    var id = link.getAttribute('href').slice(1);
+    document.querySelectorAll('details.city-acc, details.section-acc').forEach(function(d){
+      d.open = (d.id === id);
+    });
+  });
+});
+</script>
+
+</body>
+</html>
